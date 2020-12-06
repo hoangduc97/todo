@@ -1,0 +1,44 @@
+version: "3.4"
+
+services:
+    api:
+        build: ./api
+        container_name: api_todos
+        volumes:
+            - ./api:/app/api
+            - /app/api/node_modules
+        env_file: .env
+        ports:
+            - ${API_PORT}:${API_PORT}
+        links:
+            - db
+        restart: unless-stopped
+        networks:
+            - private_network
+        depends_on:
+            - db
+
+    client:
+        build: ./client
+        container_name: client_todos
+        stdin_open: true
+        volumes:
+            - ./client:/app/client
+            - /app/client/node_modules
+        env_file: .env
+        ports:
+            - ${CLIENT_PORT}:80
+        restart: unless-stopped
+        networks:
+            - private_network
+
+    db:
+        image: mongo
+        container_name: db_todos
+        networks:
+            - private_network
+
+
+networks:
+    private_network:
+        driver: bridge

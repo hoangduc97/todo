@@ -1,0 +1,77 @@
+@import '../../assets/_variable';
+@import '../../assets/_responsive';
+
+
+.task {
+    margin-bottom: 1em;
+
+    &__line {
+        display: flex;
+        background-color: $color_1;
+        padding: .5em;
+        box-shadow: -2px 2px 6px -1px black;
+
+        &--move,
+        &--checked,
+        &--detail {
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            margin-right: 1em;
+
+            svg > path {
+                stroke: $color_4;
+            }
+        }
+
+        &--move {
+            padding: .5em;
+            cursor: grabbing;
+        }
+
+        &--checked {
+            cursor: pointer;
+
+            svg {
+                border: 2px solid #ccc;
+                border-radius: 5px;
+
+                path {
+                    opacity: 0;
+                    color: #FFBA93;
+                }
+            }
+        }
+
+        &--detail {
+            cursor: pointer;
+            margin-left: 1em;
+
+            svg {
+                path {
+                    color: #FFBA93;
+                }
+            }
+        }
+
+        &--input {
+            border: none;
+            background-color: transparent;
+            width: 100%;
+            outline: none;
+            color: #cccccc;
+
+            &:focus {
+                box-shadow: 0 0 3pt 2pt $color_2;
+            }
+        }
+    }
+
+    .checked {
+        display: flex;
+    }
+
+    &__detail {
+        display: none;
+    }
+}

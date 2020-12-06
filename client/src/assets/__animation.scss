@@ -1,0 +1,21 @@
+@keyframes animate {
+    0%,
+    10%,
+    100% {
+        width: 0%;
+    }
+
+    70%,
+    90% {
+        width: 100%;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}

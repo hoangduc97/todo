@@ -1,0 +1,44 @@
+@import "../../assets/_variable";
+
+.list_task {
+    display: flex;
+    flex-direction: column;
+    width: 15em;
+    height: 20em;
+    margin: auto;
+
+    &--group {
+        background-color: $color_4;
+        border-radius: 1em;
+        height: 12em;
+        line-height: 2.5em;
+        overflow: hidden;
+        padding: 1.8em 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        li {
+            pointer-events: none;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #9F5F80;
+        }
+    }
+
+    &--info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        color: white;
+
+        & > * {
+            margin: 0.5em auto 0;
+        }
+
+        &__location {
+            color: #856A9F;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+@import '../../assets/_variable';
+@import '../../assets/_animation';
+
+.header__logo--primary {
+    a {
+        position: relative;
+        text-align: center;
+        -webkit-text-stroke: 1px #9c9c9c82;
+        color: $color_3;
+        width: fit-content;
+        margin: auto;
+    }
+}
