@@ -13,7 +13,7 @@ const Home = (props) => {
                     list_task.map((ele, index) => (
                         <CustomLink
                             key={index}
-                            to={'/ok'}
+                            to={'/lists/abc'}
                             children={<ListTask ele />}
                         />
                     ))}

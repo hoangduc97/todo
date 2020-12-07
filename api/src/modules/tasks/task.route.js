@@ -1,11 +1,12 @@
 import express from 'express';
+import { authJwt } from '../../middlewares/auth.middleware';
 import TaskService from './task.service';
 
 const router = express.Router();
 
-router.get('/', TaskService._get);
-router.post('/:id', TaskService._create);
-router.put('/:id', TaskService._update);
-router.delete('/:id', TaskService._delete);
+router.get('/', [authJwt()], TaskService._get);
+router.post('/', [authJwt()], TaskService._create);
+router.put('/:id', [authJwt()], TaskService._update);
+router.delete('/:id', [authJwt()], TaskService._delete);
 
 export default router;

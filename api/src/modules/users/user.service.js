@@ -1,7 +1,7 @@
-import {validationResult} from 'express-validator';
-import {createToken} from '../../utils/auth.util';
-import {apiStatus} from '../../utils/constants';
-import {ErrorHandler} from '../../utils/error.util';
+import { validationResult } from 'express-validator';
+import { createToken } from '../../utils/auth.util';
+import { apiStatus } from '../../utils/constants';
+import { ErrorHandler } from '../../utils/error.util';
 import User from './user.model';
 
 const register = async (req, res, next) => {
@@ -13,9 +13,9 @@ const register = async (req, res, next) => {
             13021
         );
     }
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     try {
-        const user = await User.findOne({email});
+        const user = await User.findOne({ email });
         if (user) {
             throw new ErrorHandler(
                 apiStatus.CREATE_FAILURE,
@@ -27,21 +27,20 @@ const register = async (req, res, next) => {
             email: email,
             password: password,
         });
-        new_user.save()
-            .then((user) => {
-                return res.status(apiStatus.CREATE_SUCCESS).json({
-                    success: true,
-                    message: 'User create success',
-                    data: user,
-                });
-            })
-            .catch((error) => {
+        new_user.save({}, (error, account) => {
+            if (error)
                 throw new ErrorHandler(
                     apiStatus.CREATE_FAILURE,
-                    'User create failed',
+                    'Account create failed',
                     1310
                 );
+
+            return res.status(apiStatus.CREATE_SUCCESS).json({
+                success: true,
+                message: 'Account create success',
+                data: account,
             });
+        });
     } catch (error) {
         next(error);
     }
@@ -56,10 +55,9 @@ const login = async (req, res, next) => {
             1302
         );
     }
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     try {
-        const user = await User.findOne({email: email});
-
+        const user = await User.findOne({ email: email });
         if (user) {
             user.comparePassword(password, (err, isMatch) => {
                 if (isMatch && !err) {
@@ -69,8 +67,13 @@ const login = async (req, res, next) => {
                         token: token,
                         message: 'Login success',
                     });
+                } else {
+                    throw new ErrorHandler(
+                        apiStatus.GET_FAILURE,
+                        'Login Error',
+                        1304
+                    );
                 }
-                throw new ErrorHandler(apiStatus.GET_FAILURE, 'Login Error', 1304);
             });
         } else {
             throw new ErrorHandler(apiStatus.GET_FAILURE, 'Login Error', 1304);
@@ -97,7 +100,6 @@ const getAll = async (req, res, next) => {
                     1105
                 );
             });
-
     } catch (error) {
         next(error);
     }

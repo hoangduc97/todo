@@ -1,16 +1,12 @@
 import passport from '../config/passport.config';
 
-const authJwt = (roles) => {
+const authJwt = () => {
     return (req, res, next) => {
         passport.authenticate('jwt', { session: false }, (err, user) => {
             if (err || !user)
                 return res.status(403).json({ message: 'forbidden' });
             else {
-                if (!roles.length || roles.includes(user.role)) {
-                    next();
-                } else {
-                    return res.status(403).json({ message: 'forbidden' });
-                }
+                next();
             }
         })(req, res, next);
     };
