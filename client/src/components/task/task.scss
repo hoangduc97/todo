@@ -1,15 +1,20 @@
 @import '../../assets/_variable';
 @import '../../assets/_responsive';
-
+@import '../../assets/_mixin';
 
 .task {
     margin-bottom: 1em;
+    box-shadow: -2px 2px 6px -1px black;
+
+    label {
+        @include unselectable();
+        color: white;
+    }
 
     &__line {
         display: flex;
         background-color: $color_1;
-        padding: .5em;
-        box-shadow: -2px 2px 6px -1px black;
+        padding: 0.5em;
 
         &--move,
         &--checked,
@@ -25,7 +30,7 @@
         }
 
         &--move {
-            padding: .5em;
+            padding: 0.5em;
             cursor: grabbing;
         }
 
@@ -33,12 +38,16 @@
             cursor: pointer;
 
             svg {
-                border: 2px solid #ccc;
+                border: 2px solid white;
                 border-radius: 5px;
+
+                &:hover {
+                    border-color: #06d237;
+                }
 
                 path {
                     opacity: 0;
-                    color: #FFBA93;
+                    color: #06d237;
                 }
             }
         }
@@ -49,8 +58,16 @@
 
             svg {
                 path {
-                    color: #FFBA93;
+                    color: $color_3;
                 }
+            }
+        }
+
+        .checked {
+            border-color: #06d237;
+
+            path {
+                opacity: 1;
             }
         }
 
@@ -59,19 +76,85 @@
             background-color: transparent;
             width: 100%;
             outline: none;
-            color: #cccccc;
+            color: $color_4;
 
             &:focus {
-                box-shadow: 0 0 3pt 2pt $color_2;
+                border: 2px solid $color_2;
             }
         }
     }
 
-    .checked {
-        display: flex;
+    .active {
+        display: grid;
+        padding: 1em;
+        border-top: 2px solid $color_2;
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+        transition-delay: 0.25s;
+        grid-template-columns: 60% 40%;
     }
 
     &__detail {
         display: none;
+        background-color: $color_1;
+        transform: translateY(-100%);
+
+        & > * {
+            padding: 0 1em;
+        }
+        &--left {
+            display: flex;
+            flex-direction: column;
+
+            .note_text {
+                resize: none;
+                height: 15em;
+                border: none;
+
+                &:focus {
+                    outline: $color_1 auto;
+                }
+            }
+        }
+
+        &--right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .due_date,
+            .priority {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .due_date_text,
+            .priority_text {
+                width: 100%;
+                padding: 0.25em 0.5em;
+                cursor: pointer;
+                line-height: 1.1;
+                outline: $color_1 auto 2px;
+            }
+
+            .delete__button {
+                background-color: red;
+                color: white;
+                text-transform: uppercase;
+                padding: 1em 2em;
+                border-radius: 5px;
+                border: none;
+                box-shadow: -3px 3px 3px -1px $color_2;
+                transition: box-shadow 0.3s ease;
+                cursor: pointer;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:active {
+                    box-shadow: none;
+                }
+            }
+        }
     }
 }

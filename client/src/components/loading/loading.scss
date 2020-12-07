@@ -3,8 +3,8 @@
 @import '../../assets/_animation';
 
 .loading {
-    height: calc(100vh - 6.3em);
-    background-color: $color_1;
+    height: 100vh;
+    background-color: $color_2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,13 +16,12 @@
         animation: spin 1s infinite linear;
 
         .curved__arrow {
-
             &:nth-child(1) {
-                @include curved__arrow($color_1, 30deg);
+                @include curved__arrow($color_4, 30deg);
             }
 
             &:nth-child(2) {
-                @include curved__arrow($color_1, 220deg);
+                @include curved__arrow($color_4, 220deg);
             }
         }
     }

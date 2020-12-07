@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import Loading from '../components/loading/loading.component';
 
-const TIMEOUT = 0;
+const TIMEOUT = 2000;
 
 const fakeDelay = (ms) => (promise) =>
     promise.then(
@@ -24,6 +24,12 @@ const routes = [
         path: '/lists',
         Component: React.lazy(() =>
             fakeDelay(TIMEOUT)(import('./home/home.page'))
+        ),
+    },
+    {
+        path: '/lists/:list_id',
+        Component: React.lazy(() =>
+            fakeDelay(TIMEOUT)(import('./listdetail/listdetail.page'))
         ),
     },
     {

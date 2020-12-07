@@ -1,0 +1,30 @@
+@import '../../assets/_variable';
+
+.new_task {
+    display: flex;
+    font-size: 1.2em;
+    padding: 0.5em;
+    background-color: $color_1;
+    border-radius: 10em;
+
+    &__icon {
+        margin: 0.5em;
+        color: $color_4;
+    }
+
+    &__input {
+        width: 90%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: $color_4;
+
+        &::placeholder {
+            color: inherit;
+        }
+
+        &:focus {
+            border: 2px solid $color_2;
+        }
+    }
+}
