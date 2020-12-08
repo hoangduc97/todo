@@ -11,7 +11,7 @@ const _getAll = async (req, res, next) => {
             user_id: _author.id,
         };
         List.find(filter)
-            .populate('Task')
+            .populate('tasks')
             .then((lists) => {
                 return res.status(apiStatus.GET_SUCCESS).json({
                     success: true,
@@ -37,7 +37,7 @@ const _getOne = async (req, res, next) => {
             _id: req.params['id'],
         };
         List.find(filter)
-            .populate('Task')
+            .populate('tasks')
             .then((lists) => {
                 return res.status(apiStatus.GET_SUCCESS).json({
                     success: true,

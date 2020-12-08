@@ -1,0 +1,63 @@
+@import '../../assets/_variable';
+
+.auth {
+    display: flex;
+    margin: auto;
+    width: 22em;
+    height: 100vh;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        & > * {
+            margin-bottom: 1.5em;
+        }
+    }
+
+    &__input {
+        background-color: $color_2;
+        border: 2px solid $color_1;
+        border-radius: 5px;
+        color: $color_4;
+        outline: none;
+        padding: 1em 2em;
+
+        &::placeholder {
+            color: $color_3;
+        }
+    }
+
+    &__button {
+        background-color: $color_2;
+        text-transform: uppercase;
+        color: $color_3;
+        font-size: 1.2em;
+        border: none;
+        box-shadow: 0px 1px 5px -1px black;
+        padding: 0.6em;
+        cursor: pointer;
+        outline: none;
+        transition: box-shadow 0.1s ease;
+
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    &__option {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            color: $color_3;
+            font-size: .8em;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

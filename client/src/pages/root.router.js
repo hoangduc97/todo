@@ -47,13 +47,13 @@ const routes = [
     {
         path: '/signin',
         Component: React.lazy(() =>
-            fakeDelay(TIMEOUT)(import('./schedule/schedule.page'))
+            fakeDelay(TIMEOUT)(import('./auth/signin/signin.page'))
         ),
     },
     {
         path: '/signup',
         Component: React.lazy(() =>
-            fakeDelay(TIMEOUT)(import('./schedule/schedule.page'))
+            fakeDelay(TIMEOUT)(import('./auth/signup/signup.page'))
         ),
     },
 ];

@@ -43,7 +43,7 @@ const _create = async (req, res, next) => {
             note: req.body.note ? req.body.note : null,
             priority: req.body.priority ? req.body.priority : 0,
             due_date: req.body.due_date ? req.body.due_date : null,
-            list: req.params['list_id'],
+            list: req.body.list,
         };
 
         const found = await List.findById({ _id: new_task.list });
@@ -51,7 +51,11 @@ const _create = async (req, res, next) => {
         if (found) {
             const task = new Task(new_task);
             task.save()
-                .then((task_data) => {
+                .then(async (task_data) => {
+                    await List.findByIdAndUpdate(
+                        { _id: task_data.list },
+                        { $push: { tasks: task_data._id } }
+                    );
                     return res.status(apiStatus.CREATE_SUCCESS).json({
                         success: true,
                         message: 'Created successful',
@@ -93,9 +97,9 @@ const _update = async (req, res, next) => {
         const update_task = {
             title: req.body.title,
             completed: req.body.completed,
-            note: req.body.note ? req.body.note : null,
+            note: req.body.note ? req.body.note : '',
             priority: req.body.priority ? req.body.priority : 0,
-            due_date: req.body.due_date ? req.body.due_date : null,
+            due_date: req.body.due_date ? req.body.due_date : '',
         };
 
         await Task.findOneAndUpdate(filter, update_task)
