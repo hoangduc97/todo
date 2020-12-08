@@ -1,18 +1,22 @@
-import Task from './task.model';
-import List from '../lists/list.model';
+import List from './list.model';
 import { validationResult } from 'express-validator';
 import { ErrorHandler } from '../../utils/error.util';
 import { apiStatus } from '../../utils/constants';
+import { retrieveToken } from '../../utils/auth.util';
 
-const _get = async (req, res, next) => {
+const _getAll = async (req, res, next) => {
     try {
-        const filter = { list: req.params['list_id'] };
-        Task.find(filter)
-            .then((tasks) => {
+        const _author = await retrieveToken(req.headers);
+        const filter = {
+            user_id: _author.id,
+        };
+        List.find(filter)
+            .populate('Task')
+            .then((lists) => {
                 return res.status(apiStatus.GET_SUCCESS).json({
                     success: true,
                     message: 'Data Found',
-                    data: tasks,
+                    data: lists,
                 });
             })
             .catch((error) => {
@@ -26,6 +30,33 @@ const _get = async (req, res, next) => {
         next(error);
     }
 };
+
+const _getOne = async (req, res, next) => {
+    try {
+        const filter = {
+            _id: req.params['id'],
+        };
+        List.find(filter)
+            .populate('Task')
+            .then((lists) => {
+                return res.status(apiStatus.GET_SUCCESS).json({
+                    success: true,
+                    message: 'Data Found',
+                    data: lists,
+                });
+            })
+            .catch((error) => {
+                throw new ErrorHandler(
+                    apiStatus.GET_FAILURE,
+                    'Data not found',
+                    1105
+                );
+            });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const _create = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -37,41 +68,29 @@ const _create = async (req, res, next) => {
     }
 
     try {
-        const new_task = {
+        const _author = await retrieveToken(req.headers);
+        const new_list = {
+            user_id: _author.id,
             title: req.body.title,
-            completed: req.body.completed,
-            note: req.body.note ? req.body.note : null,
-            priority: req.body.priority ? req.body.priority : 0,
-            due_date: req.body.due_date ? req.body.due_date : null,
-            list: req.params['list_id'],
+            tasks: [],
         };
 
-        const found = await List.findById({ _id: new_task.list });
-
-        if (found) {
-            const task = new Task(new_task);
-            task.save()
-                .then((task_data) => {
-                    return res.status(apiStatus.CREATE_SUCCESS).json({
-                        success: true,
-                        message: 'Created successful',
-                        data: task_data,
-                    });
-                })
-                .catch((error) => {
-                    throw new ErrorHandler(
-                        apiStatus.CREATE_FAILURE,
-                        'Create failure',
-                        1105
-                    );
+        const list = new List(new_list);
+        list.save()
+            .then((task_data) => {
+                return res.status(apiStatus.CREATE_SUCCESS).json({
+                    success: true,
+                    message: 'Created successful',
+                    data: task_data,
                 });
-        } else {
-            throw new ErrorHandler(
-                apiStatus.CREATE_FAILURE,
-                'List not existed',
-                1105
-            );
-        }
+            })
+            .catch((error) => {
+                throw new ErrorHandler(
+                    apiStatus.CREATE_FAILURE,
+                    'Create failure',
+                    1105
+                );
+            });
     } catch (error) {
         next(error);
     }
@@ -92,13 +111,9 @@ const _update = async (req, res, next) => {
         };
         const update_task = {
             title: req.body.title,
-            completed: req.body.completed,
-            note: req.body.note ? req.body.note : null,
-            priority: req.body.priority ? req.body.priority : 0,
-            due_date: req.body.due_date ? req.body.due_date : null,
         };
 
-        await Task.findOneAndUpdate(filter, update_task)
+        await List.findOneAndUpdate(filter, update_task)
             .then((task_data) => {
                 return res.status(apiStatus.CREATE_SUCCESS).json({
                     success: true,
@@ -131,7 +146,7 @@ const _delete = async (req, res, next) => {
         const filter = {
             _id: req.params['id'],
         };
-        await Task.findOneAndDelete(filter, update_task)
+        await List.findOneAndDelete(filter, update_task)
             .then((task_data) => {
                 return res.status(apiStatus.DELETE_SUCCESS).json({
                     success: true,
@@ -152,7 +167,8 @@ const _delete = async (req, res, next) => {
 };
 
 const TaskService = {
-    _get,
+    _getAll,
+    _getOne,
     _create,
     _update,
     _delete,

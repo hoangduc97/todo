@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
 const task = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Types.ObjectId,
-        required: true,
-    },
     title: {
         type: String,
         required: true,
@@ -22,6 +18,10 @@ const task = new mongoose.Schema({
     },
     due_date: {
         type: Date,
+    },
+    list: {
+        type: mongoose.Types.ObjectId,
+        ref: 'List',
     },
 });
 
