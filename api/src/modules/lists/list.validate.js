@@ -4,4 +4,4 @@ const taskValidate = [
     check('title').notEmpty(),
 ];
 
-export {taskValidate};
+export default taskValidate;

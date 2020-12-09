@@ -1,12 +1,12 @@
 import Task from './task.model';
 import List from '../lists/list.model';
-import { validationResult } from 'express-validator';
-import { ErrorHandler } from '../../utils/error.util';
-import { apiStatus } from '../../utils/constants';
+import {validationResult} from 'express-validator';
+import {ErrorHandler} from '../../utils/error.util';
+import {apiStatus} from '../../utils/constants';
 
 const _get = async (req, res, next) => {
     try {
-        const filter = { list: req.params['list_id'] };
+        const filter = {list: req.params['list_id']};
         Task.find(filter)
             .then((tasks) => {
                 return res.status(apiStatus.GET_SUCCESS).json({
@@ -40,19 +40,19 @@ const _create = async (req, res, next) => {
         const new_task = {
             title: req.body.title,
             completed: req.body.completed,
-            note: req.body.note ? req.body.note : null,
-            priority: req.body.priority ? req.body.priority : 0,
-            due_date: req.body.due_date ? req.body.due_date : null,
+            note: req.body.note,
+            priority: req.body.priority,
+            due_date: req.body.due_date,
             list: list,
         };
-        const found = await List.findById({ _id: new_task.list });
+        const found = await List.findById({_id: new_task.list});
         if (found) {
             const task = new Task(new_task);
             task.save()
                 .then(async (task_data) => {
                     await List.findByIdAndUpdate(
-                        { _id: task_data.list },
-                        { $push: { tasks: task_data._id } }
+                        {_id: task_data.list},
+                        {$push: {tasks: task_data._id}}
                     );
                     return res.status(apiStatus.CREATE_SUCCESS).json({
                         success: true,
@@ -79,28 +79,28 @@ const _create = async (req, res, next) => {
     }
 };
 const _update = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.UPDATE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.UPDATE_FAILURE,
+                errors.toString(),
+                1302
+            );
+        }
         const filter = {
             _id: req.params['id'],
         };
         const update_task = {
             title: req.body.title,
             completed: req.body.completed,
-            note: req.body.note ? req.body.note : '',
-            priority: req.body.priority ? req.body.priority : 0,
-            due_date: req.body.due_date ? req.body.due_date : '',
+            note: req.body.note,
+            priority: req.body.priority,
+            due_date: req.body.due_date,
         };
 
-        await Task.findOneAndUpdate(filter, update_task)
+        await Task.findOneAndUpdate(filter, update_task, {"new": true})
+            .exec()
             .then((task_data) => {
                 return res.status(apiStatus.CREATE_SUCCESS).json({
                     success: true,
@@ -120,21 +120,12 @@ const _update = async (req, res, next) => {
     }
 };
 const _delete = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.DELETE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
         const filter = {
             _id: req.params['id'],
         };
-        await Task.findOneAndDelete(filter, update_task)
-            .then((task_data) => {
+        await Task.findOneAndDelete(filter)
+            .then(async (task_data) => {
                 return res.status(apiStatus.DELETE_SUCCESS).json({
                     success: true,
                     message: 'Deleted successful',

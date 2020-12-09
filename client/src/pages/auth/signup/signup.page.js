@@ -69,7 +69,7 @@ const Signup = (props) => {
                             placeholder="confirm password"
                             required
                             onKeyDown={(e) => {
-                                if (e.key == 27) {
+                                if (e.keyCode == 13) {
                                     handleSubmit(e);
                                 }
                             }}

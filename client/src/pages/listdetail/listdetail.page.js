@@ -1,47 +1,64 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Task from '../../components/task/task.component';
 import NewTask from '../../components/newtask/newtask.component';
-import {
-    addTask,
-    getAllTask,
-    updateTask,
-    deleteTask,
-} from './listdetail.action';
+import {addTask, deleteTask, getAllTask, updateTask,} from './listdetail.action';
+import {connect} from 'react-redux';
 import './listdetail.scss';
-import { connect } from 'react-redux';
 
 const ListDetail = (props) => {
+    const [showCompleted, setShowCompleted] = useState(false);
+    const [updated, setUpdated] = useState(false);
     useEffect(() => {
-        const listId = props.params['list_id']
+        const listId = props.params['list_id'];
+        console.log('rerender')
         props.getAllTask(listId);
     }, [props.getAllTask]);
+    const handleShowCompleted = () => setShowCompleted(!showCompleted);
+    const handleUpdated = () => setUpdated(!updated);
 
-    const handleTask = (task) => {
-        console.log(task);
-    }
+    const completedCount = props.tasks ? props.tasks.filter(t => t.completed).length : 0;
     return (
         <div className="list_detail task__content">
-            <button className="button task__content--button">Done({0})</button>
+            <button className="button task__content--button" onClick={handleShowCompleted}>Done({completedCount})
+            </button>
             <ul className="task__content--tasks">
+                {showCompleted &&
+                props.tasks &&
+                props.tasks
+                    .filter(t => t.completed)
+                    .map((ele) => {
+                        return (
+                            <Task
+                                key={ele._id}
+                                {...ele}
+                                updateTask={props.updateTask}
+                                deleteTask={props.deleteTask}
+                                updated={handleUpdated}
+                            />
+                        );
+                    })
+                }
                 {props.tasks &&
-                    props.tasks
-                        .filter((t) => !t.completed)
-                        .map((ele, index) => {
-                            return (
-                                <Task
-                                    key={index}
-                                    {...ele}
-                                    handleTask={handleTask}
-                                />
-                            );
-                        })}
-                <NewTask />
+                props.tasks
+                    .filter(t => !t.completed)
+                    .map((ele) => {
+                        return (
+                            <Task
+                                key={ele._id}
+                                {...ele}
+                                updateTask={props.updateTask}
+                                deleteTask={props.deleteTask}
+                                updated={handleUpdated}
+                            />
+                        );
+                    })}
+                <NewTask addTask={props.addTask} listId={props.params['list_id']}/>
             </ul>
         </div>
     );
 };
 
-const mapStateToProps = ({ ListDetailReducer }) => ({
+const mapStateToProps = ({ListDetailReducer}) => ({
     tasks: ListDetailReducer.tasks,
 });
 

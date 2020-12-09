@@ -57,7 +57,7 @@ const updateTask = (task) => (dispatch) => {
 const deleteTask = (id) => (dispatch) => {
     dispatch({ type: listDetailConst.DELETE_REQUEST });
     taskApi
-        .create(id)
+        .delete(id)
         .then((res) => {
             dispatch({
                 type: listDetailConst.DELETE_SUCCESS,

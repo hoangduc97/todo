@@ -5,7 +5,17 @@
 .task {
     margin-bottom: 1em;
     box-shadow: -2px 2px 6px -1px black;
+    position: relative;
 
+    &::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
     label {
         @include unselectable();
         color: white;
@@ -92,6 +102,17 @@
         transition: transform 0.3s ease;
         transition-delay: 0.25s;
         grid-template-columns: 60% 40%;
+        position: relative;
+
+        &::before {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     }
 
     &__detail {
@@ -102,6 +123,7 @@
         & > * {
             padding: 0 1em;
         }
+
         &--left {
             display: flex;
             flex-direction: column;
@@ -121,6 +143,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+
             .due_date,
             .priority {
                 display: flex;
@@ -147,9 +170,11 @@
                 .delete {
                     background-color: red;
                 }
+
                 .save {
                     background-color: green;
                 }
+
                 .delete,
                 .save {
                     color: white;
@@ -171,5 +196,32 @@
                 }
             }
         }
+    }
+}
+
+.low {
+    &::before {
+        background-color: green;
+    }
+    .active::before {
+        background-color: green;
+    }
+}
+
+.medium {
+    &::before {
+        background-color: yellow;
+    }
+    .active::before {
+        background-color: yellow;
+    }
+}
+
+.high {
+    &::before {
+        background-color: red;
+    }
+    .active::before {
+        background-color: red;
     }
 }

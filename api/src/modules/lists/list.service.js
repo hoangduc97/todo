@@ -1,4 +1,5 @@
 import List from './list.model';
+import Task from '../tasks/task.model';
 import { validationResult } from 'express-validator';
 import { ErrorHandler } from '../../utils/error.util';
 import { apiStatus } from '../../utils/constants';
@@ -58,16 +59,15 @@ const _getOne = async (req, res, next) => {
 };
 
 const _create = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.CREATE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.CREATE_FAILURE,
+                errors.toString(),
+                1302
+            );
+        }
         const _author = await retrieveToken(req.headers);
         const new_list = {
             user_id: _author.id,
@@ -96,16 +96,15 @@ const _create = async (req, res, next) => {
     }
 };
 const _update = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.UPDATE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.UPDATE_FAILURE,
+                errors.toString(),
+                1302
+            );
+        }
         const filter = {
             _id: req.params['id'],
         };
@@ -113,7 +112,8 @@ const _update = async (req, res, next) => {
             title: req.body.title,
         };
 
-        await List.findOneAndUpdate(filter, update_task)
+        await List.findOneAndUpdate(filter, update_task, { "new": true})
+            .exec()
             .then((task_data) => {
                 return res.status(apiStatus.CREATE_SUCCESS).json({
                     success: true,
@@ -133,21 +133,13 @@ const _update = async (req, res, next) => {
     }
 };
 const _delete = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.DELETE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
         const filter = {
             _id: req.params['id'],
         };
         await List.findOneAndDelete(filter, update_task)
-            .then((task_data) => {
+            .then(async (task_data) => {
+                await Task.deleteMany({list: filter._id});
                 return res.status(apiStatus.DELETE_SUCCESS).json({
                     success: true,
                     message: 'Deleted successful',

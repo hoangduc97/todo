@@ -6,4 +6,4 @@ const taskValidate = [
 ];
 
 
-export {taskValidate};
+export default taskValidate;

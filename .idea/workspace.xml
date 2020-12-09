@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="692eaa9c-7ce9-41ce-9d1e-7e0cec0e7c57" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/todo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/lists/list.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/lists/list.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/lists/list.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/lists/list.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/lists/list.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/lists/list.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/tasks/task.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/tasks/task.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/tasks/task.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/tasks/task.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/tasks/task.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/tasks/task.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/modules/tasks/task.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/modules/tasks/task.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/newtask/newtask.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/newtask/newtask.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/task/task.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/task/task.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/task/task.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/task/task.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/auth/signin/signin.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/auth/signin/signin.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/auth/signup/signup.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/auth/signup/signup.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/authRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/authRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/listdetail/listdetail.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/webpack.config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lQO15XzY4vFFKPJeW4Qp5Wl8J8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="692eaa9c-7ce9-41ce-9d1e-7e0cec0e7c57" name="Default Changelist" comment="" />
+      <created>1607525632201</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607525632201</updated>
+      <workItem from="1607525636448" duration="8771000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

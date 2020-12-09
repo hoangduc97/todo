@@ -23,9 +23,10 @@ const ListDetailReducer = (state = initialState, { type, payload }) => {
                 err: payload,
             };
         case listDetailConst.UPDATE_SUCCESS:
+            console.log(payload)
             return {
                 tasks: [
-                    ...state.tasks.filter((l) => l._id != payload._id),
+                    ...state.tasks.filter((l) => l._id !== payload._id),
                     payload,
                 ],
             };
@@ -36,7 +37,7 @@ const ListDetailReducer = (state = initialState, { type, payload }) => {
             };
         case listDetailConst.DELETE_SUCCESS:
             return {
-                tasks: [...state.tasks.filter((t) => t._id != payload)],
+                tasks: [...state.tasks.filter((t) => t._id !== payload._id)],
             };
         case listDetailConst.DELETE_FAILURE:
             return {
