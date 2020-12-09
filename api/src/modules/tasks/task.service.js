@@ -27,27 +27,25 @@ const _get = async (req, res, next) => {
     }
 };
 const _create = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.CREATE_FAILURE,
-            errors.toString(),
-            1302
-        );
-    }
-
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.CREATE_FAILURE,
+                errors.toString(),
+                1302
+            );
+        }
+        const list = req.params['list_id'];
         const new_task = {
             title: req.body.title,
             completed: req.body.completed,
             note: req.body.note ? req.body.note : null,
             priority: req.body.priority ? req.body.priority : 0,
             due_date: req.body.due_date ? req.body.due_date : null,
-            list: req.body.list,
+            list: list,
         };
-
         const found = await List.findById({ _id: new_task.list });
-
         if (found) {
             const task = new Task(new_task);
             task.save()

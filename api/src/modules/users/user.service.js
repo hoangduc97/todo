@@ -5,16 +5,16 @@ import { ErrorHandler } from '../../utils/error.util';
 import User from './user.model';
 
 const register = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.CREATE_FAILURE,
-            'Invalid Register Type',
-            13021
-        );
-    }
-    const { email, password } = req.body;
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.CREATE_FAILURE,
+                'Invalid Register Type',
+                13021
+            );
+        }
+        const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (user) {
             throw new ErrorHandler(
@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
             email: email,
             password: password,
         });
-        new_user.save({}, (error, account) => {
+        new_user.save({}, (error, user) => {
             if (error)
                 throw new ErrorHandler(
                     apiStatus.CREATE_FAILURE,
@@ -35,10 +35,11 @@ const register = async (req, res, next) => {
                     1310
                 );
 
+            const token = createToken(user);
             return res.status(apiStatus.CREATE_SUCCESS).json({
                 success: true,
                 message: 'Account create success',
-                data: account,
+                data: token,
             });
         });
     } catch (error) {
@@ -47,16 +48,16 @@ const register = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new ErrorHandler(
-            apiStatus.GET_FAILURE,
-            'Invalid Login Type',
-            1302
-        );
-    }
-    const { email, password } = req.body;
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ErrorHandler(
+                apiStatus.GET_FAILURE,
+                'Invalid Login Type',
+                1302
+            );
+        }
+        const { email, password } = req.body;
         const user = await User.findOne({ email: email });
         if (user) {
             user.comparePassword(password, (err, isMatch) => {

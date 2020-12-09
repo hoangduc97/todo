@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { login } from '../auth.action';
-import Signin from './signin.page';
+import { register } from '../auth.action';
+import Signup from './signup.page';
 
 const mapStateToProps = ({ AuthReducer }) => {
     return {
@@ -11,8 +11,10 @@ const mapStateToProps = ({ AuthReducer }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (user) => dispatch(login(user)),
+        register: (user) => {
+            dispatch(register(user));
+        },
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

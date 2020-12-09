@@ -5,7 +5,7 @@ import './task.scss';
 const Task = (props) => {
     const [title, setTitle] = useState(props.title);
     const [completed, setCompleted] = useState(props.completed);
-    const [note, setNote] = useState(props.note);
+    const [note, setNote] = useState(props.note || '');
     const [due_date, setDueDate] = useState(props.due_date || '');
     const [priority, setPriority] = useState(props.priority);
     const [detail, setDetail] = useState(false);
@@ -86,7 +86,10 @@ const Task = (props) => {
                             <option value={3}>High</option>
                         </select>
                     </div>
-                    <button className="delete__button">delete</button>
+                    <div className="button__group">
+                        <button className="save">save</button>
+                        <button className="delete">delete</button>
+                    </div>
                 </div>
             </div>
         </li>

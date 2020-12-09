@@ -7,8 +7,8 @@ import rootReduder from './root.reducer';
 const middlewares = [];
 
 const logger = createLogger();
-middlewares.push(logger);
 middlewares.push(thunk);
+middlewares.push(logger);
 
 const store = createStore(rootReduder, applyMiddleware(...middlewares));
 

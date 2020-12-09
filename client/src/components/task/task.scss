@@ -136,23 +136,38 @@
                 outline: $color_1 auto 2px;
             }
 
-            .delete__button {
-                background-color: red;
-                color: white;
-                text-transform: uppercase;
-                padding: 1em 2em;
-                border-radius: 5px;
-                border: none;
-                box-shadow: -3px 3px 3px -1px $color_2;
-                transition: box-shadow 0.3s ease;
-                cursor: pointer;
+            .priority_text {
+                padding: 0.4em;
+            }
 
-                &:focus {
-                    outline: none;
+            .button__group {
+                display: flex;
+                justify-content: space-between;
+
+                .delete {
+                    background-color: red;
                 }
+                .save {
+                    background-color: green;
+                }
+                .delete,
+                .save {
+                    color: white;
+                    text-transform: uppercase;
+                    padding: 1em 2em;
+                    border-radius: 5px;
+                    border: none;
+                    box-shadow: -3px 3px 3px -1px $color_2;
+                    transition: box-shadow 0.3s ease;
+                    cursor: pointer;
 
-                &:active {
-                    box-shadow: none;
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &:active {
+                        box-shadow: none;
+                    }
                 }
             }
         }

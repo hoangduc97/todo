@@ -13,16 +13,16 @@ const roleConstant = {
 
 const apiStatus = {
     CREATE_SUCCESS: 201,
-    CREATE_FAILURE: 404,
+    CREATE_FAILURE: 400,
 
     GET_SUCCESS: 200,
-    GET_FAILURE: 404,
+    GET_FAILURE: 400,
 
     UPDATE_SUCCESS: 200,
-    UPDATE_FAILURE: 404,
+    UPDATE_FAILURE: 400,
 
     DELETE_SUCCESS: 200,
-    DELETE_FAILURE: 404,
+    DELETE_FAILURE: 400,
 
     
 }
