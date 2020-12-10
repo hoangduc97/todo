@@ -1,6 +1,5 @@
 import React from 'react';
 import Task from '../../components/task/task.component';
-import './schedule.scss';
 
 const Schedule = (props) => {
     return (
