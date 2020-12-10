@@ -89,9 +89,7 @@ const Routes = (props) => {
                         </AuthRoute>
                     ))}
                     <LogoutRoute exact path="/logout" />
-                    <Route path={'/*'}>
-                        <NotFound />
-                    </Route>
+                    <Route component={NotFound} />
                 </Switch>
             </TransitionGroup>
         </Suspense>
