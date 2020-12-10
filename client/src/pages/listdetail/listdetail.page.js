@@ -10,7 +10,6 @@ const ListDetail = (props) => {
     const [updated, setUpdated] = useState(false);
     useEffect(() => {
         const listId = props.params['list_id'];
-        console.log('rerender')
         props.getAllTask(listId);
     }, [props.getAllTask]);
     const handleShowCompleted = () => setShowCompleted(!showCompleted);

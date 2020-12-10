@@ -35,7 +35,6 @@ const register = async (req, res, next) => {
                     1310
                 );
             
-                console.log(user);
             const token = await createToken(user);
             return res.status(apiStatus.CREATE_SUCCESS).json({
                 success: true,

@@ -23,7 +23,6 @@ const ListDetailReducer = (state = initialState, { type, payload }) => {
                 err: payload,
             };
         case listDetailConst.UPDATE_SUCCESS:
-            console.log(payload)
             return {
                 tasks: [
                     ...state.tasks.filter((l) => l._id !== payload._id),
