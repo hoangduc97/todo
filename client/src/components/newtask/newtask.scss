@@ -21,10 +21,7 @@
 
         &::placeholder {
             color: inherit;
-        }
-
-        &:focus {
-            border: 2px solid $color_2;
+            opacity: .7;
         }
     }
 }

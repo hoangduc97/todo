@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Loading from '../components/loading/loading.component';
 import AuthRoute from './authRoute';
 import LogoutRoute from './auth/logoutRoute';
-const TIMEOUT = 2000;
+const TIMEOUT = 1000;
 
 const fakeDelay = (ms) => (promise) =>
     promise.then(

@@ -31,6 +31,7 @@ database
     });
 
 app.use((err, req, res, next) => {
+    console.log(err);
     if (err.errorCode) {
         return handleError(err, res);
     }

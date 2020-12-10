@@ -27,19 +27,20 @@ const register = async (req, res, next) => {
             email: email,
             password: password,
         });
-        new_user.save({}, (error, user) => {
+        new_user.save({}, async (error, user) => {
             if (error)
                 throw new ErrorHandler(
                     apiStatus.CREATE_FAILURE,
                     'Account create failed',
                     1310
                 );
-
-            const token = createToken(user);
+            
+                console.log(user);
+            const token = await createToken(user);
             return res.status(apiStatus.CREATE_SUCCESS).json({
                 success: true,
                 message: 'Account create success',
-                data: token,
+                token: token,
             });
         });
     } catch (error) {
