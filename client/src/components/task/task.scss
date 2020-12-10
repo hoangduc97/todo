@@ -8,7 +8,7 @@
     position: relative;
 
     &::before {
-        content: "";
+        content: '';
         display: block;
         width: 4px;
         height: 100%;
@@ -109,12 +109,12 @@
             flex-direction: column;
 
             & > * {
-                margin: 1em auto;
+                margin: 1em 0;
             }
         }
 
         &::before {
-            content: "";
+            content: '';
             display: block;
             width: 4px;
             height: 100%;
@@ -155,7 +155,7 @@
 
             @include mobile {
                 & > * {
-                    margin: 1em auto;
+                    margin-top: 1em;
                 }
             }
 
