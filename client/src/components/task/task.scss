@@ -104,6 +104,15 @@
         grid-template-columns: 60% 40%;
         position: relative;
 
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+
+            & > * {
+                margin: 1em auto;
+            }
+        }
+
         &::before {
             content: "";
             display: block;
@@ -143,6 +152,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+
+            @include mobile {
+                & > * {
+                    margin: 1em auto;
+                }
+            }
 
             .due_date,
             .priority {

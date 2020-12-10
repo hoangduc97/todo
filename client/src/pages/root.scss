@@ -17,7 +17,7 @@
         width: calc(100% - 20em);
         min-height: 100%;
         overflow-y: scroll;
-
+        
         @include tablet {
             width: 70%;
         }
@@ -52,6 +52,10 @@
     &--tasks {
         width: 50em;
         margin: auto;
+        @include mobile {
+            width: auto;
+            margin: auto 1em;
+        }
     }
 }
 
